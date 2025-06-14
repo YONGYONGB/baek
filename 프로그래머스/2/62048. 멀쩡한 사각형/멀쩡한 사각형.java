@@ -1,17 +1,14 @@
 class Solution {
-    public long solution(int w, int h) {
-        int gcd = getGCD(w, h);  // 최대공약수
-        long blocked = (long)w + (long)h - gcd; // 잘린 사각형 개수
-        return (long)w * (long)h - blocked;
-    }
-
-    // 최대공약수(GCD) - 유클리드 알고리즘
-    private int getGCD(int a, int b) {
-        while (b != 0) {
-            int tmp = a % b;
-            a = b;
-            b = tmp;
+    public long solution(int w,int h) {
+        long min=Math.min(w, h);
+        long max=Math.max(w, h);
+        long remain=1;
+        while(remain>0) {
+            remain=max%min;
+            max=min;
+            min=remain;
         }
-        return a;
+        long answer = (long)w*(long)h-max*(w/max + h/max -1);
+        return answer;
     }
 }
