@@ -1,31 +1,35 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
+        String[] str = new String[N];
 
-        Set<String> set = new HashSet<>();
-        for (int i = 0; i < n; i++) {
-            set.add(br.readLine());  
+        for (int i = 0; i < N; i++) {
+            str[i] = br.readLine();
         }
 
-        List<String> list = new ArrayList<>(set);
-
-        Collections.sort(list, (a, b) -> {
-            if (a.length() == b.length()) {
-                return a.compareTo(b); 
-            }
-            return a.length() - b.length();  
+        Arrays.sort(str, (s1, s2) -> {
+        if (s1.length() == s2.length()) {
+            return s1.compareTo(s2);
+        } else {
+            return s1.length() - s2.length();
+        }
         });
 
         StringBuilder sb = new StringBuilder();
-        for (String s : list) {
-            sb.append(s).append('\n');
-        }
+        sb.append(str[0]).append("\n");
 
-        System.out.print(sb);
+        for (int i = 1; i < N; i++) {
+            if (!str[i].equals(str[i - 1])) {
+                sb.append(str[i]).append("\n");
+            }
+        }
+        System.out.println(sb);
     }
 }
