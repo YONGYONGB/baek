@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -10,24 +9,18 @@ public class Main {
         int n = Integer.parseInt(stand[0]);
         int m = Integer.parseInt(stand[1]);
         
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            set.add(br.readLine());
+        }
+
         int ans = 0;
-        String[] temp = new String[n];
-        
-        for(int i=0; i<n+m;i++){
-            String a = br.readLine();
-            if(i<n){
-                temp[i] = a;
-            }else if(n <= i){
-                for(int j=0; j<n;j++){
-                    if(temp[j].equals(a)){
-                        ans++;
-                        break;
-                    }
-                }
+        for (int i = 0; i < m; i++) {
+            if (set.contains(br.readLine())) {
+                ans++;
             }
         }
+
         System.out.print(ans);
-        
     }
-    
 }
