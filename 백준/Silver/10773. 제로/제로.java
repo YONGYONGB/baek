@@ -8,6 +8,7 @@ public class Main{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         int n =Integer.parseInt(br.readLine());
+        StringBuilder sb = new StringBuilder();
         int ans = 0;
         
         Stack<Integer> stack = new Stack<>();
@@ -15,17 +16,16 @@ public class Main{
         for(int i=0; i<n; i++){
             int num = Integer.parseInt(br.readLine());
             if(num == 0 ){
-                stack.pop();
+                ans -= stack.pop();
             }else{
                 stack.push(num);
+                ans += num;
             }
         }
         
-        while(stack.size() != 0){
-            ans += stack.pop();
-        }
         
-        System.out.print(ans);
+        sb.append(ans);
+        System.out.print(sb);
         
     }
     
