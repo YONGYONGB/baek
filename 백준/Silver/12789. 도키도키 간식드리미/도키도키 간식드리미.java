@@ -1,35 +1,48 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
+public class Main{
+    public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         int n = Integer.parseInt(br.readLine());
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        Deque<Integer> stack = new ArrayDeque<>();
+        StringBuilder sb = new StringBuilder();
+        boolean getFood = true;
+        String[] row = br.readLine().split(" ");
+        
         int count = 1;
-
-        for (int i = 0; i < n; i++) {
-            int num = Integer.parseInt(st.nextToken());
-
-            if (num == count) {
+        Stack<Integer> stack = new Stack<>();
+        
+        for(int i=0; i<n; i++){
+            int num = Integer.parseInt(row[i]);
+            if(num != count){
+                stack.push(num);
+            }else{
                 count++;
-                while (!stack.isEmpty() && stack.peek() == count) {
-                    stack.pop();
-                    count++;
+                while(true){
+                    if(!stack.isEmpty() && stack.peek() == count){
+                        stack.pop();
+                        count++;
+                    }else{
+                        break;
+                    }
                 }
-            } else {
-                stack.push(num); // Deque는 stack처럼 push/pop 사용 가능
             }
         }
-
-        // 성공 조건: 스택이 비어있고 count == n+1
-        if (stack.isEmpty() && count == n + 1) {
-            System.out.println("Nice");
-        } else {
-            System.out.println("Sad");
+        
+        if(stack.size() != 0 || count != n+1){
+            getFood = false;
         }
+        
+        
+       
+        if(getFood == true){
+            sb.append("Nice");
+        }else{
+            sb.append("Sad");
+        }
+        
+        System.out.print(sb);
+        
     }
 }
